@@ -69,7 +69,7 @@ public class TicTacToeGame {
 		char p2Input = p1Input == 'x' ? 'o' : 'x';
 		inputAtEmptyPosition(board, p2Input);
 		showBoard(board);
-		while (true) {
+		while (!checkForTie(board) && true) {
 
 			// player1
 			System.out.println("player1 chance: ");
@@ -79,9 +79,10 @@ public class TicTacToeGame {
 			// checking winning position on board
 			if (winningPositionReached(board)) {
 				System.out.println("Player1 won!!");
-				break;
+				showBoard(board);
+				return;
 			}
-			showBoard(board);
+			
 			// player2
 			p2Input = p1Input == 'x' ? 'o' : 'x';
 			System.out.println("player2 chance: ");
@@ -89,10 +90,12 @@ public class TicTacToeGame {
 			inputAtEmptyPosition(board, p2Input);
 			if (winningPositionReached(board)) {
 				System.out.println("Player2 won!!");
-				break;
+				showBoard(board);
+				return;
 			}
 			showBoard(board);
 		}
+		System.out.println("Its tie!!!");
 		showBoard(board);
 
 	}
@@ -155,6 +158,15 @@ public class TicTacToeGame {
 			} else// if center is available
 				msg = "***choose center position***";
 		System.out.println(msg);
+	}
+
+	// checking if board is full
+	public static boolean checkForTie(char[] board) {
+        int count = 0;
+		for (char pos : board)
+			if (pos != ' ')
+				count++;
+		return count == board.length;
 	}
 
 	// driver main method
