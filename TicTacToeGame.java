@@ -49,7 +49,17 @@ public class TicTacToeGame {
 				System.out.println("Position filled..choose different position");
 		}
 	}
-
+    
+	//Who plays first
+	public static String checkWhoPlaysFirst() {
+		
+		int i = (int) (Math.floor(Math.random()*10))%2 + 1;
+		if(i == 1) 
+			 return "user";
+		else 
+			return "computer";
+	}
+	
 	public static void main(String[] args) {
 
 		char[] board = new char[10];
@@ -57,7 +67,11 @@ public class TicTacToeGame {
 		char userInput = chooseInput();
 		char computerInput = userInput == 'x' ? 'o' : 'x';
 		showBoard(board);
-		inputAtEmptyPosition(board, userInput);
+		String turn = checkWhoPlaysFirst();
+		if(turn.equals("user"))
+		     inputAtEmptyPosition(board, userInput);
+		else
+			inputAtEmptyPosition(board, computerInput);
 		showBoard(board);
 	}
 
