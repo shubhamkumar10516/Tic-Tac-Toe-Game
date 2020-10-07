@@ -7,10 +7,10 @@ public class TicTacToeGame {
 	private static Scanner sc = new Scanner(System.in);
 
 	// assigning empty space to board
-	public static void assignBoardEmptySpace(char[] ch) {
+	public static void assignBoardEmptySpace(char[] board) {
 
-		for (int i = 1; i < ch.length; i++)
-			ch[i] = ' ';
+		for (int i = 1; i < board.length; i++)
+			board[i] = ' ';
 	}
 
 	// taking input from user
@@ -25,15 +25,14 @@ public class TicTacToeGame {
 	public static void showBoard(char[] board) {
 
 		System.out.println("---Show board---");
-		for (int i = 1; i <= 3; i++)
-			System.out.print(i + ": |" + board[i] + "| ");
-		System.out.println();
-		for (int i = 4; i <= 6; i++)
-			System.out.print(i + ": |" + board[i] + "| ");
-		System.out.println();
-		for (int i = 7; i <= 9; i++)
-			System.out.print(i + ": |" + board[i] + "| ");
-
+		int pos = 1; 
+			System.out.println(" "+board[pos] + "   |  " + board[pos+1] + "  |  "+ board[pos+2]);
+			System.out.println("____________");
+			System.out.println(" "+board[pos+3] + "   |  " + board[pos+4] + "  |  "+ board[pos+5]);
+			System.out.println("____________");
+			System.out.println(" "+board[pos+6] + "   |  " + board[pos+7] + "  |  "+ board[pos+8]);
+			System.out.println("____________");
+		
 	}
 
 	// Taking input at specified position
@@ -48,7 +47,6 @@ public class TicTacToeGame {
 			}
 			if (board[pos] != ' ')
 				System.out.println("Position filled..choose different position");
-
 		}
 	}
 
