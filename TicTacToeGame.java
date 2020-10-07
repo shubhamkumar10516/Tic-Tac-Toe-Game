@@ -32,7 +32,6 @@ public class TicTacToeGame {
 		System.out.println("____________");
 		System.out.println(" " + board[pos + 6] + "   |  " + board[pos + 7] + "  |  " + board[pos + 8]);
 		System.out.println("____________");
-
 	}
 
 	// Taking input at specified position
@@ -123,7 +122,7 @@ public class TicTacToeGame {
 		return false;
 	}
 
-	//play to block: looking for two connected same symbol 
+	// play to block: looking for two connected same symbol
 	public static void playtoBlockWinOrChooseCorner(char[] board) {
 		String msg = "Play any corner position";
 		if ((board[1] == board[2]) && (board[1] != ' '))
@@ -150,16 +149,14 @@ public class TicTacToeGame {
 			msg = "Probable position is 9 to prevent win";
 		else if ((board[7] == board[8]) && (board[7] != ' '))
 			msg = "Probable position is 9 to prevent win";
-		else if(board[1] != ' ' && board[3] != ' ' && board[7] != ' ' && board[9] != ' ')
-			if(board[5] != ' ') {
-				msg = "***can't choose center  position***";
-				
-			}
-			else
+		else if (board[1] != ' ' && board[3] != ' ' && board[7] != ' ' && board[9] != ' ')
+			if (board[5] != ' ') {
+				msg = "***can't choose center..take any availabe sides***";
+			} else// if center is available
 				msg = "***choose center position***";
-			
 		System.out.println(msg);
 	}
+
 	// driver main method
 	public static void main(String[] args) {
 
