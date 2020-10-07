@@ -74,6 +74,7 @@ public class TicTacToeGame {
 
 			// player1
 			System.out.println("player1 chance: ");
+			playtoBlockWin(board);
 			p1Input = p2Input == 'x' ? 'o' : 'x';
 			inputAtEmptyPosition(board, p1Input);
 			// checking winning position on board
@@ -85,6 +86,7 @@ public class TicTacToeGame {
 			// player2
 			p2Input = p1Input == 'x' ? 'o' : 'x';
 			System.out.println("player2 chance: ");
+			playtoBlockWin(board);
 			inputAtEmptyPosition(board, p2Input);
 			if (winningPositionReached(board)) {
 				System.out.println("Player2 won!!");
@@ -121,6 +123,29 @@ public class TicTacToeGame {
 		return false;
 	}
 
+	//play to block: looking for two connected same symbol 
+	public static void playtoBlockWin(char[] board) {
+		String msg = "Play any corner position";
+		if ((board[1] == board[2]) && (board[1] != ' '))
+			msg = "Probable position is 3 to prevent win";
+		else if ((board[1] == board[5]) && (board[1] != ' '))
+			msg = "Probable position is 9 to prevent win";
+		else if ((board[1] == board[4]) && (board[1] != ' '))
+			msg = "Probable position is 7 to prevent win";
+		else if ((board[2] == board[5]) && (board[2] != ' '))
+			msg = "Probable position is 3 to prevent win";
+		else if ((board[3] == board[6]) && (board[3] != ' '))
+			msg = "Probable position is 9 to prevent win";
+		else if ((board[3] == board[5]) && (board[3] != ' '))
+			msg = "Probable position is 7 to prevent win";
+		else if ((board[4] == board[5]) && (board[4] != ' '))
+			msg = "Probable position is 6 to prevent win";
+		else if ((board[3] == board[6]) && (board[3] != ' '))
+			msg = "Probable position is 9 to prevent win";
+		else if ((board[7] == board[8]) && (board[7] != ' '))
+			msg = "Probable position is 9 to prevent win";
+		System.out.println(msg);
+	}
 	// driver main method
 	public static void main(String[] args) {
 
