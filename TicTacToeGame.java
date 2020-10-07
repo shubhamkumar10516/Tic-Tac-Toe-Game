@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class TicTacToeGame {
 
-	private static Scanner sc = new Scanner(System.in);
+	private static Scanner takeInput = new Scanner(System.in);
 
 	// assigning empty space to board
 	public static void assignBoardEmptySpace(char[] board) {
@@ -17,7 +17,7 @@ public class TicTacToeGame {
 	public static char chooseInput() {
 
 		System.out.println("Enter the choice x or o");
-		char input = sc.next().charAt(0);
+		char input = takeInput.next().charAt(0);
 		return input;
 	}
 
@@ -37,8 +37,8 @@ public class TicTacToeGame {
 	// Taking input at specified position
 	public static void inputAtEmptyPosition(char[] board, char userInput) {
 
-		System.out.println("\nGive specify position: (1 - 9) ");
-		int pos = sc.nextInt();
+		System.out.println("Give specify position: (1 - 9) ");
+		int pos = takeInput.nextInt();
 		while (true && (pos < 10)) {
 			if (board[pos] == ' ') {
 				board[pos] = userInput;
@@ -70,7 +70,6 @@ public class TicTacToeGame {
 		inputAtEmptyPosition(board, p2Input);
 		showBoard(board);
 		while (!checkForTie(board) && true) {
-
 			// player1
 			System.out.println("player1 chance: ");
 			playtoBlockWinOrChooseCorner(board);
@@ -82,7 +81,6 @@ public class TicTacToeGame {
 				showBoard(board);
 				return;
 			}
-			
 			// player2
 			p2Input = p1Input == 'x' ? 'o' : 'x';
 			System.out.println("player2 chance: ");
@@ -102,8 +100,8 @@ public class TicTacToeGame {
 
 	// Winning position calculation
 	public static boolean winningPositionReached(char[] board) {
-		System.out.println("---Calculating winnig position---");
 
+		System.out.println("---Calculating winnig position---");
 		if ((board[1] == board[2]) && (board[2] == board[3]) && (board[2] != ' '))
 			return true;
 		else if ((board[1] == board[5]) && (board[5] == board[9]) && (board[1] != ' '))
@@ -127,6 +125,7 @@ public class TicTacToeGame {
 
 	// play to block: looking for two connected same symbol
 	public static void playtoBlockWinOrChooseCorner(char[] board) {
+
 		String msg = "Play any corner position";
 		if ((board[1] == board[2]) && (board[1] != ' '))
 			msg = "Probable position is 3 to prevent win";
@@ -162,11 +161,33 @@ public class TicTacToeGame {
 
 	// checking if board is full
 	public static boolean checkForTie(char[] board) {
-        int count = 0;
+
+		int count = 0;
 		for (char pos : board)
 			if (pos != ' ')
 				count++;
 		return count == board.length;
+	}
+
+	// play again if game over
+	public static void gameOver(char[] board) {
+
+		for (int pos = 0; pos < board.length; pos++)
+			board[pos] = ' ';
+		System.out.println("Press 1 to play again and any other to exit");
+		int op = takeInput.nextInt();
+		if (op == 1) {
+			showBoard(board);
+			char userInput = chooseInput();
+			char computerInput = userInput == 'x' ? 'o' : 'x';
+			String turn = checkWhoPlaysFirst();
+			if (turn.equals("user"))
+				determineWinnerAndChangeTheTurn(board, userInput);
+			else
+				determineWinnerAndChangeTheTurn(board, computerInput);
+		} else {
+			System.out.println("Thank you!!");
+		}
 	}
 
 	// driver main method
@@ -181,7 +202,7 @@ public class TicTacToeGame {
 		if (turn.equals("user"))
 			determineWinnerAndChangeTheTurn(board, userInput);
 		else
-			determineWinnerAndChangeTheTurn(board, userInput);
+			determineWinnerAndChangeTheTurn(board, computerInput);
 	}
 
 }
