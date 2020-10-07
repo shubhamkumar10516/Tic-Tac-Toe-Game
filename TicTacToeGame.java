@@ -61,21 +61,6 @@ public class TicTacToeGame {
 			return "computer";
 	}
 
-	// computer input
-	public static void inputAtEmptyPositionByComputer(char[] board, char computerInput) {
-
-		int pos = (int) Math.floor(Math.random() * 10) % 9 + 1;
-		while (true) {
-			if (board[pos] == ' ') {
-				board[pos] = computerInput;
-				break;
-			}
-			if (board[pos] != ' ')
-				pos = (int) Math.floor(Math.random() * 10) % 9 + 1;
-		}
-		showBoard(board);
-	}
-
 	// Determine next player or winning
 	public static void determineWinnerAndChangeTheTurn(char[] board, char p1Input) {
 
@@ -91,7 +76,8 @@ public class TicTacToeGame {
 			System.out.println("player1 chance: ");
 			p1Input = p2Input == 'x' ? 'o' : 'x';
 			inputAtEmptyPosition(board, p1Input);
-			if(winningPositionReached(board)) {
+			// checking winning position on board
+			if (winningPositionReached(board)) {
 				System.out.println("Player1 won!!");
 				break;
 			}
@@ -100,7 +86,7 @@ public class TicTacToeGame {
 			p2Input = p1Input == 'x' ? 'o' : 'x';
 			System.out.println("player2 chance: ");
 			inputAtEmptyPosition(board, p2Input);
-			if(winningPositionReached(board)) {
+			if (winningPositionReached(board)) {
 				System.out.println("Player2 won!!");
 				break;
 			}
@@ -109,11 +95,11 @@ public class TicTacToeGame {
 		showBoard(board);
 
 	}
-	
-    //Winning position
+
+	// Winning position calculation
 	public static boolean winningPositionReached(char[] board) {
-        System.out.println("---Calculating winnig position---");
-        
+		System.out.println("---Calculating winnig position---");
+
 		if ((board[1] == board[2]) && (board[2] == board[3]) && (board[2] != ' '))
 			return true;
 		else if ((board[1] == board[5]) && (board[5] == board[9]) && (board[1] != ' '))
@@ -134,7 +120,8 @@ public class TicTacToeGame {
 			return true;
 		return false;
 	}
-    // driver main method
+
+	// driver main method
 	public static void main(String[] args) {
 
 		char[] board = new char[10];
