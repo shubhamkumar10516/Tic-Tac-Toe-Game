@@ -74,7 +74,7 @@ public class TicTacToeGame {
 
 			// player1
 			System.out.println("player1 chance: ");
-			playtoBlockWin(board);
+			playtoBlockWinOrChooseCorner(board);
 			p1Input = p2Input == 'x' ? 'o' : 'x';
 			inputAtEmptyPosition(board, p1Input);
 			// checking winning position on board
@@ -86,7 +86,7 @@ public class TicTacToeGame {
 			// player2
 			p2Input = p1Input == 'x' ? 'o' : 'x';
 			System.out.println("player2 chance: ");
-			playtoBlockWin(board);
+			playtoBlockWinOrChooseCorner(board);
 			inputAtEmptyPosition(board, p2Input);
 			if (winningPositionReached(board)) {
 				System.out.println("Player2 won!!");
@@ -124,12 +124,18 @@ public class TicTacToeGame {
 	}
 
 	//play to block: looking for two connected same symbol 
-	public static void playtoBlockWin(char[] board) {
+	public static void playtoBlockWinOrChooseCorner(char[] board) {
 		String msg = "Play any corner position";
 		if ((board[1] == board[2]) && (board[1] != ' '))
 			msg = "Probable position is 3 to prevent win";
 		else if ((board[1] == board[5]) && (board[1] != ' '))
 			msg = "Probable position is 9 to prevent win";
+		else if ((board[1] == board[3]) && (board[1] != ' '))
+			msg = "Probable position is 2 to prevent win";
+		else if ((board[1] == board[7]) && (board[1] != ' '))
+			msg = "Probable position is 4 to prevent win";
+		else if ((board[1] == board[9]) && (board[1] != ' '))
+			msg = "Probable position is 5 to prevent win";
 		else if ((board[1] == board[4]) && (board[1] != ' '))
 			msg = "Probable position is 7 to prevent win";
 		else if ((board[2] == board[5]) && (board[2] != ' '))
@@ -144,6 +150,14 @@ public class TicTacToeGame {
 			msg = "Probable position is 9 to prevent win";
 		else if ((board[7] == board[8]) && (board[7] != ' '))
 			msg = "Probable position is 9 to prevent win";
+		else if(board[1] != ' ' && board[3] != ' ' && board[7] != ' ' && board[9] != ' ')
+			if(board[5] != ' ') {
+				msg = "***can't choose center  position***";
+				
+			}
+			else
+				msg = "***choose center position***";
+			
 		System.out.println(msg);
 	}
 	// driver main method
